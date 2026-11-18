@@ -30,12 +30,17 @@
   <h1><span class="r">TOPENÍ</span>-<span class="m">VODA</span>-<span class="z">PLYN</span></h1>
   <p id="stav">Otevírám aplikaci…</p>
   <a class="btn" id="otevrit" href="#">Otevřít aplikaci</a>
+  <p><a id="jinak" href="#">Hlásí Google chybu přihlášení? Otevřít jinak</a></p>
 </div>
 <script>
-  /* Adresa ostré verze aplikace (Google Apps Script /exec). Bez /a/~/: ikona z plochy má vlastní přihlášení a nepřihlášeného
-     uživatele by tvar /a/~/ poslal na přihlášení firemního účtu (Google Workspace) a skončil chybou u účtu Gmail. */
-  var APLIKACE = 'https://script.google.com/macros/s/AKfycbysKdOj1Tm_MHsu50AmcZ9S4JRL98d-mBsna4zPpx57TX3w_pJ41zd-vTAwsnmnPoh3/exec';
+  /* Adresa ostré verze aplikace (Google Apps Script /exec). Ikona se otevírá v prohlížeči, kde je uživatel přihlášený,
+     často více účty Google: tvar /a/~/ vybere účet s přístupem (prostý tvar vezme výchozí účet a Disk hlásí „Soubor nelze otevřít“).
+     Nepřihlášeného by /a/~/ poslal na přihlášení Google Workspace, proto je pod tlačítkem i prostý tvar. */
+  var ID = 'AKfycbysKdOj1Tm_MHsu50AmcZ9S4JRL98d-mBsna4zPpx57TX3w_pJ41zd-vTAwsnmnPoh3';
+  var APLIKACE = 'https://script.google.com/a/~/macros/s/' + ID + '/exec';
+  var PROSTA = 'https://script.google.com/macros/s/' + ID + '/exec';
   document.getElementById('otevrit').href = APLIKACE;
+  document.getElementById('jinak').href = PROSTA;
   if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(function () {});
   if (navigator.onLine === false) document.getElementById('stav').textContent = 'Bez připojení k internetu. Zkuste to znovu, až bude signál.';
   else setTimeout(function () { location.replace(APLIKACE); }, 300);

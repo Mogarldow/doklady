@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Topení-Voda-Plyn – doklady</title>
-<!-- Ikona se otevírá v prohlížeči, ne v samostatném okně: Google Apps Script v samostatném okně iPhonu
-     nedostane přihlášení k vnitřnímu rámu a ukáže chybu Disku „Soubor momentálně nelze otevřít“. -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" href="ikona96.png">
 <link rel="apple-touch-icon" href="ikona180.png">
@@ -43,7 +43,12 @@
   document.getElementById('jinak').href = PROSTA;
   if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(function () {});
   if (navigator.onLine === false) document.getElementById('stav').textContent = 'Bez připojení k internetu. Zkuste to znovu, až bude signál.';
-  else setTimeout(function () { location.replace(APLIKACE); }, 300);
+  /* Samostatné okno z plochy (iPhone) má vlastní přihlášení: nejdřív přes přihlášení Google (přihlášeného hned pustí dál),
+     pak /a/~/. Bez toho /a/~/ nepřihlášeného pošle na přihlášení Google Workspace a skončí chybou. */
+  var samostatne = window.navigator.standalone === true || (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches);
+  var CIL = samostatne ? 'https://accounts.google.com/ServiceLogin?continue=' + encodeURIComponent(APLIKACE) : APLIKACE;
+  document.getElementById('otevrit').href = CIL;
+  if (navigator.onLine !== false) setTimeout(function () { location.replace(CIL); }, 300);
 </script>
 </body>
 </html>

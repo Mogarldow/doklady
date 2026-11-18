@@ -32,8 +32,9 @@
   <a class="btn" id="otevrit" href="#">Otevřít aplikaci</a>
 </div>
 <script>
-  /* Adresa ostré verze aplikace (Google Apps Script /exec). Tvar /a/~/ funguje i při více přihlášených účtech Google. */
-  var APLIKACE = 'https://script.google.com/a/~/macros/s/AKfycbysKdOj1Tm_MHsu50AmcZ9S4JRL98d-mBsna4zPpx57TX3w_pJ41zd-vTAwsnmnPoh3/exec';
+  /* Adresa ostré verze aplikace (Google Apps Script /exec). Bez /a/~/: ikona z plochy má vlastní přihlášení a nepřihlášeného
+     uživatele by tvar /a/~/ poslal na přihlášení firemního účtu (Google Workspace) a skončil chybou u účtu Gmail. */
+  var APLIKACE = 'https://script.google.com/macros/s/AKfycbysKdOj1Tm_MHsu50AmcZ9S4JRL98d-mBsna4zPpx57TX3w_pJ41zd-vTAwsnmnPoh3/exec';
   document.getElementById('otevrit').href = APLIKACE;
   if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(function () {});
   if (navigator.onLine === false) document.getElementById('stav').textContent = 'Bez připojení k internetu. Zkuste to znovu, až bude signál.';

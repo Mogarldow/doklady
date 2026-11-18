@@ -1,5 +1,5 @@
 /* Minimální service worker: aplikaci jde nainstalovat; bez spojení ukáže úvodní stránku. */
-var CACHE = 'doklady-v2';
+var CACHE = 'doklady-v3';
 self.addEventListener('install', function (e) {
   e.waitUntil(caches.open(CACHE).then(function (c) { return c.addAll(['./', 'ikona192.png', 'manifest.webmanifest']); }));
   self.skipWaiting();

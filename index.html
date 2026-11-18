@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Topení-Voda-Plyn – doklady</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="ikona96.png">
+<link rel="apple-touch-icon" href="ikona180.png">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1e1e1e" media="(prefers-color-scheme: dark)">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Doklady TVP">
+<style>
+  :root { --text: #222; --tlumene: #666; --bg: #fff; --modra: #00B0F0; }
+  @media (prefers-color-scheme: dark) { :root { --text: #eee; --tlumene: #aaa; --bg: #1e1e1e; } }
+  html, body { margin: 0; height: 100%; background: var(--bg); color: var(--text); font-family: Calibri, 'Segoe UI', Arial, sans-serif; }
+  .stred { min-height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 16px; box-sizing: border-box; text-align: center; }
+  img { width: 96px; height: 96px; }
+  h1 { font-size: 20px; margin: 0; }
+  h1 .r { color: #FF0000; } h1 .m { color: var(--modra); } h1 .z { color: #FFC000; }
+  a.btn { display: inline-block; padding: 12px 22px; border-radius: 8px; background: var(--modra); color: #fff; text-decoration: none; font-weight: 700; }
+  p { color: var(--tlumene); margin: 0; font-size: 14px; }
+</style>
+</head>
+<body>
+<div class="stred">
+  <img src="ikona192.png" alt="">
+  <h1><span class="r">TOPENÍ</span>-<span class="m">VODA</span>-<span class="z">PLYN</span></h1>
+  <p id="stav">Otevírám aplikaci…</p>
+  <a class="btn" id="otevrit" href="#">Otevřít aplikaci</a>
+</div>
+<script>
+  /* Adresa ostré verze aplikace (Google Apps Script /exec). Tvar /a/~/ funguje i při více přihlášených účtech Google. */
+  var APLIKACE = 'https://script.google.com/a/~/macros/s/AKfycbysKdOj1Tm_MHsu50AmcZ9S4JRL98d-mBsna4zPpx57TX3w_pJ41zd-vTAwsnmnPoh3/exec';
+  document.getElementById('otevrit').href = APLIKACE;
+  if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(function () {});
+  if (navigator.onLine === false) document.getElementById('stav').textContent = 'Bez připojení k internetu. Zkuste to znovu, až bude signál.';
+  else setTimeout(function () { location.replace(APLIKACE); }, 300);
+</script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "name": "Topení-Voda-Plyn – doklady",
+  "short_name": "Doklady TVP",
+  "description": "Nabídky, potvrzení objednávek, rozpočty a zápisy o zkouškách",
+  "lang": "cs",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "icons": [
+    { "src": "ikona192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "ikona512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "ikona512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
